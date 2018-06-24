@@ -7,12 +7,23 @@ class TodoController < ApplicationController
     t.description = params[:description]
     t.pomodoros = params[:pomodoros]
     t.status = nil
+    t.duedate = params[:duedate]
     t.save 
     redirect_to '/todo/index'
   end 
   
   def index
       @incomplete_todos = Todo.where(status: nil)
+      @due_today = @incomplete_todos.where(duedate: Date.today)
+      @due_tomorrow = @incomplete_todos.where(duedate: Date.tomorrow)
+      @due_later = Array.new 
+      
+      @incomplete_todos.each do |todo|
+        unless todo.duedate == Date.today || todo.duedate == Date.tomorrow
+          @due_later << todo  
+       end
+    end
+
       @completed_todos = Todo.where(status: true)
   end
     
@@ -29,10 +40,11 @@ class TodoController < ApplicationController
     todo.status = params[:status]
     todo.description = params[:description]
     todo.pomodoros = params[:pomodoros]
+    todo.duedate = params[:duedate]
     todo.save
     
     
-    redirect_to "/todo/show/#{todo.id}"
+    redirect_to "/todo/index"
   end 
   
   def delete
