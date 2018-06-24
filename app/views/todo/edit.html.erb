@@ -3,6 +3,7 @@
 </h1>
 
 <form action="/todo/update/<%= @todo.id %>">
+  <input type ="checkbox" name="status" value="true">
   <input class="text-input" name="description"  id="new-todo-description" type="text" value="<%= @todo.description %>">
   <input class="text-input" name="pomodoros" id="new-pomodoro-estimate" type="number" value="<%= @todo.pomodoros %>">
   <input class="button" id="add-new-todo-button" type="submit" value="Update to-do">

@@ -2,14 +2,25 @@
   Workshop Todo List
 </h1>
 
+<h3>Incomplete To-dos</h3>
 <ul>
-  <% @todos.each do |todo| %>
+  <% @incomplete_todos.each do |todo| %>
      <li>
-       <input type="checkbox" />
        <a href="/todo/show/<%= todo.id%>"><%= todo.description %></a>
        <span><%= todo.pomodoros %> Pomodoros</span>
      </li>
   <% end %>
 </ul>
+
+<h3>Completed To-dos</h3>
+<ul>
+  <% @completed_todos.each do |todo| %>
+     <li>
+       <a href="/todo/show/<%= todo.id%>"><%= todo.description %></a>
+       <span><%= todo.pomodoros %> Pomodoros</span>
+     </li>
+  <% end %>
+</ul>
+
 
 <a href="/todo/new">Add a new to-do...</a>  
